@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        <div id="username">
+            {{ form_row(form.username) }}
+        </div>
+        <div id="birthday">
+            {{ form_row(form.birthday) }}
+        </div>
+        <div id="gender">
+            {{ form_row(form.gender) }}
+        </div>
+        <div id="phone">
+            {{ form_row(form.phoneNumber) }}
+        </div>
+        {{ form_widget(form.submit, { 'label': 'Confirm' }) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
@@ -11,19 +12,26 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $username;
+    #[Assert\NotBlank(message: 'Username should not be blank.')]
+    #[Assert\Length(min: 3, max: 30)]
+    private string $username;
 
     #[ORM\Column(type: 'date')]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private $birthday;
 
     #[ORM\Column(type: 'smallint')]
-    private $gender;
+    #[Assert\NotBlank]
+    private int $gender;
 
     #[ORM\Column(type: 'string', length: 15)]
-    private $phoneNumber;
+    #[Assert\NotBlank]
+    #[Assert\Regex("/^[0-9 +-]*$/")]
+    private string $phoneNumber;
 
     public function getId(): ?int
     {
